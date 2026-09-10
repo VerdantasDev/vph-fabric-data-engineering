@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "pl_create_indexes"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "8ec423b2-607e-8f75-4a18-edcb42175d3a"
+  }
+}

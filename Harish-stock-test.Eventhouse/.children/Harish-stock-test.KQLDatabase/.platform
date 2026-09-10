@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "KQLDatabase",
+    "displayName": "Harish-stock-test",
+    "description": "Harish-stock-test"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "910c3158-e8de-a96d-4be4-0e2cdfa96738"
+  }
+}

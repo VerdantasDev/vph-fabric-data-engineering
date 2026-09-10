@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Warehouse",
+    "displayName": "Verdantas_DW",
+    "description": ""
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "4825ab6e-5565-8d14-4662-b05806d71e94"
+  }
+}

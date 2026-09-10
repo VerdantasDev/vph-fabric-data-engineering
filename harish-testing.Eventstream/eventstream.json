@@ -1,0 +1,67 @@
+{
+  "sources": [
+    {
+      "id": "5814f811-9272-47e7-aeda-b1936d1191cd",
+      "name": "fabric-onelake-events",
+      "type": "FabricOneLakeEvents",
+      "properties": {
+        "tenantId": "694b700c-7f7a-4dd6-8d36-04e90dfc0d02",
+        "workspaceId": "a4338e88-8d35-40c8-9929-a5b820d084e3",
+        "itemId": "06d71e94-b058-4662-8d14-55654825ab6e",
+        "oneLakePaths": [
+          "/Tables"
+        ],
+        "includedEventTypes": [
+          "Microsoft.Fabric.OneLake.FileCreated",
+          "Microsoft.Fabric.OneLake.FileDeleted"
+        ],
+        "filters": []
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "id": "d3e764ea-0943-4f77-8464-1d26baf12a2d",
+      "name": "Activator_filealert",
+      "type": "Activator",
+      "properties": {
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "itemId": "ff744ac7-4cf6-b789-471c-b826e7ebe2dc",
+        "inputSerialization": {
+          "type": "Json",
+          "properties": {
+            "encoding": "UTF8"
+          }
+        }
+      },
+      "inputNodes": [
+        {
+          "name": "harish-testing-stream"
+        }
+      ],
+      "inputSchemas": [
+        {
+          "name": "harish-testing-stream",
+          "schema": {
+            "columns": []
+          }
+        }
+      ]
+    }
+  ],
+  "streams": [
+    {
+      "id": "41d752a4-5b2b-4cbc-b183-48f60453a932",
+      "name": "harish-testing-stream",
+      "type": "DefaultStream",
+      "properties": {},
+      "inputNodes": [
+        {
+          "name": "fabric-onelake-events"
+        }
+      ]
+    }
+  ],
+  "operators": [],
+  "compatibilityLevel": "1.1"
+}

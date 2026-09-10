@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Environment",
+    "displayName": "anshika-test",
+    "description": "Environment"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "57faabed-f4c0-9c67-4666-197e8fc7cdc7"
+  }
+}

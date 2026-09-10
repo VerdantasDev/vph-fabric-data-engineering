@@ -1,0 +1,43 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {
+    "allowModernEvaluationEngine": true,
+    "allowModernRefreshService": true
+  },
+  "name": "testing_harish",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "SalesRawTable": {
+      "queryId": "91178ea8-4f0e-4f33-bfba-0961d382a1db",
+      "queryName": "SalesRawTable"
+    },
+    "CustomersTable": {
+      "queryId": "e2468dbb-3e93-4397-aeef-ed956a59d544",
+      "queryName": "CustomersTable"
+    },
+    "ProductsTable": {
+      "queryId": "35815d06-67dc-4f9a-a89c-1128dfb07132",
+      "queryName": "ProductsTable"
+    },
+    "RegionsTable": {
+      "queryId": "40eb96cf-d36f-4fe0-89a2-8d6b68ea1f2c",
+      "queryName": "RegionsTable"
+    },
+    "TargetsTable": {
+      "queryId": "8ad00f09-a198-47e8-aa38-66f052eaba71",
+      "queryName": "TargetsTable"
+    },
+    "ReturnsTable": {
+      "queryId": "30437075-3279-493f-a16f-f15b419ad8ce",
+      "queryName": "ReturnsTable"
+    }
+  },
+  "connections": [
+    {
+      "path": "https://hullinc-my.sharepoint.com/personal/hkamunuri_verdantas_com/",
+      "kind": "Web",
+      "connectionId": "{\"ClusterId\":\"85f5f1df-a947-4a8f-a867-3815643ed806\",\"DatasourceId\":\"75e5761d-dcc9-41a2-ac0b-edcf65356976\"}"
+    }
+  ]
+}

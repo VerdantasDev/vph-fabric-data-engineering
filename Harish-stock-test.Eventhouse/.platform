@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Eventhouse",
+    "displayName": "Harish-stock-test",
+    "description": "Harish-stock-test"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "cca6f732-8135-bd0b-43eb-340331b63162"
+  }
+}

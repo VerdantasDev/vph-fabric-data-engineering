@@ -1,0 +1,213 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "name": "Copy_3me",
+        "type": "Copy",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "source": {
+            "type": "BinarySource",
+            "storeSettings": {
+              "type": "HttpReadSettings",
+              "requestMethod": "GET"
+            },
+            "formatSettings": {
+              "type": "BinaryReadSettings",
+              "compressionProperties": {
+                "type": "ZipDeflateReadSettings"
+              }
+            },
+            "datasetSettings": {
+              "annotations": [],
+              "type": "Binary",
+              "typeProperties": {
+                "location": {
+                  "type": "HttpServerLocation"
+                },
+                "compression": {
+                  "type": "ZipDeflate"
+                }
+              },
+              "externalReferences": {
+                "connection": "e1e65bdf-a9ff-4a7e-808a-35bc728b8e1e"
+              }
+            }
+          },
+          "sink": {
+            "type": "BinarySink",
+            "storeSettings": {
+              "type": "LakehouseWriteSettings",
+              "copyBehavior": "PreserveHierarchy"
+            },
+            "datasetSettings": {
+              "annotations": [],
+              "linkedService": {
+                "name": "VPC_Dev_Fablh_data",
+                "properties": {
+                  "annotations": [],
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "workspaceId": "297572de-b7d7-4285-a88e-1388e2598d4a",
+                    "artifactId": "24113e54-6f3f-4157-8c30-a3c5e66de623",
+                    "rootFolder": "Files"
+                  }
+                }
+              },
+              "type": "Binary",
+              "typeProperties": {
+                "location": {
+                  "type": "LakehouseLocation",
+                  "fileName": "codebase",
+                  "folderPath": "Archive/TestResults"
+                },
+                "compression": {
+                  "type": "ZipDeflate"
+                }
+              }
+            }
+          },
+          "enableStaging": false
+        }
+      },
+      {
+        "name": "Copy_gs0",
+        "type": "Copy",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "source": {
+            "type": "BinarySource",
+            "storeSettings": {
+              "type": "HttpReadSettings",
+              "requestMethod": "GET"
+            },
+            "datasetSettings": {
+              "annotations": [],
+              "type": "Binary",
+              "typeProperties": {
+                "location": {
+                  "type": "HttpServerLocation"
+                },
+                "compression": {
+                  "type": "ZipDeflate"
+                }
+              },
+              "externalReferences": {
+                "connection": "e1e65bdf-a9ff-4a7e-808a-35bc728b8e1e"
+              }
+            }
+          },
+          "sink": {
+            "type": "BinarySink",
+            "storeSettings": {
+              "type": "LakehouseWriteSettings",
+              "copyBehavior": "PreserveHierarchy"
+            },
+            "datasetSettings": {
+              "annotations": [],
+              "linkedService": {
+                "name": "VPC_Dev_Fablh_data",
+                "properties": {
+                  "annotations": [],
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "workspaceId": "297572de-b7d7-4285-a88e-1388e2598d4a",
+                    "artifactId": "24113e54-6f3f-4157-8c30-a3c5e66de623",
+                    "rootFolder": "Files"
+                  }
+                }
+              },
+              "type": "Binary",
+              "typeProperties": {
+                "location": {
+                  "type": "LakehouseLocation",
+                  "fileName": "Mapping",
+                  "folderPath": "Archive/TestResults"
+                }
+              }
+            }
+          },
+          "enableStaging": false
+        }
+      },
+      {
+        "name": "Copy_vxs",
+        "type": "Copy",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "source": {
+            "type": "BinarySource",
+            "storeSettings": {
+              "type": "HttpReadSettings",
+              "requestMethod": "GET"
+            },
+            "datasetSettings": {
+              "annotations": [],
+              "type": "Binary",
+              "typeProperties": {
+                "location": {
+                  "type": "HttpServerLocation"
+                }
+              },
+              "externalReferences": {
+                "connection": "e1e65bdf-a9ff-4a7e-808a-35bc728b8e1e"
+              }
+            }
+          },
+          "sink": {
+            "type": "BinarySink",
+            "storeSettings": {
+              "type": "LakehouseWriteSettings",
+              "copyBehavior": "PreserveHierarchy"
+            },
+            "datasetSettings": {
+              "annotations": [],
+              "linkedService": {
+                "name": "VPC_Dev_Fablh_data",
+                "properties": {
+                  "annotations": [],
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "workspaceId": "297572de-b7d7-4285-a88e-1388e2598d4a",
+                    "artifactId": "24113e54-6f3f-4157-8c30-a3c5e66de623",
+                    "rootFolder": "Files"
+                  }
+                }
+              },
+              "type": "Binary",
+              "typeProperties": {
+                "location": {
+                  "type": "LakehouseLocation",
+                  "fileName": "Mapping",
+                  "folderPath": "Archive"
+                }
+              }
+            }
+          },
+          "enableStaging": false
+        }
+      }
+    ]
+  }
+}

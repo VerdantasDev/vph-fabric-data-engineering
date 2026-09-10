@@ -1,0 +1,1 @@
+CREATE ROLE [Reporting_RO];

@@ -1,0 +1,91 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "LakehouseTableSource",
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "table": "sv_modified_adp_data"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "VPC_Dev_Fablh_data",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "24113e54-6f3f-4157-8c30-a3c5e66de623",
+                    "workspaceId": "297572de-b7d7-4285-a88e-1388e2598d4a",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "AzureSearchIndexSink",
+            "indexAction": "merge",
+            "writeBatchSize": 1000,
+            "datasetSettings": {
+              "type": "AzureSearchIndex",
+              "typeProperties": {
+                "indexName": "vpc-dev-adp-test-index"
+              },
+              "schema": [],
+              "externalReferences": {
+                "connection": "39db22a6-87da-46b0-a119-09e9885990dd"
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Copy data from Onelake to Index",
+        "dependsOn": [
+          {
+            "activity": "create index if not present",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "4ecf2169-6022-870d-449b-d2c6096c7719",
+          "workspaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "create index if not present",
+        "dependsOn": []
+      }
+    ]
+  }
+}

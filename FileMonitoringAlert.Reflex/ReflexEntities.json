@@ -1,0 +1,38 @@
+[
+  {
+    "uniqueIdentifier": "d3e764ea-0943-4f77-8464-1d26baf12a2d",
+    "payload": {
+      "name": "EventStream",
+      "metadata": {
+        "eventstreamArtifactId": "e3ea4088-37bb-4e08-8296-8727668c93d8"
+      }
+    },
+    "type": "eventstreamSource-v1"
+  },
+  {
+    "uniqueIdentifier": "a5d40e90-c340-42ea-90dc-54b4d254ba98",
+    "payload": {
+      "name": "harish-testing-stream",
+      "definition": {
+        "type": "Event",
+        "instance": "{\"templateId\":\"SourceEvent\",\"templateVersion\":\"1.1\",\"steps\":[{\"name\":\"SourceEventStep\",\"id\":\"ca5137f1-dcea-4dd5-aba8-3e59ddc74684\",\"rows\":[{\"name\":\"SourceSelector\",\"kind\":\"SourceReference\",\"arguments\":[{\"name\":\"entityId\",\"type\":\"string\",\"value\":\"d3e764ea-0943-4f77-8464-1d26baf12a2d\"}]}]}]}"
+      }
+    },
+    "type": "timeSeriesView-v1"
+  },
+  {
+    "uniqueIdentifier": "742927ad-3411-46c2-9375-8890a8530950",
+    "payload": {
+      "name": "File Alert",
+      "definition": {
+        "type": "Rule",
+        "instance": "{\"templateId\":\"EventTrigger\",\"templateVersion\":\"1.3.0\",\"steps\":[{\"name\":\"FieldsDefaultsStep\",\"id\":\"9386da8f-262f-4d4f-ba9c-ea79dd3224ce\",\"rows\":[{\"name\":\"EventSelector\",\"kind\":\"Event\",\"arguments\":[{\"kind\":\"EventReference\",\"type\":\"complex\",\"arguments\":[{\"name\":\"entityId\",\"type\":\"string\",\"value\":\"a5d40e90-c340-42ea-90dc-54b4d254ba98\"}],\"name\":\"event\"}]}]},{\"name\":\"EventDetectStep\",\"id\":\"142d0fcf-8121-4d1f-9971-e82015d46552\",\"rows\":[{\"name\":\"OnEveryValue\",\"kind\":\"OnEveryValue\",\"arguments\":[]}]},{\"name\":\"ActStep\",\"id\":\"6b40aefd-04ce-451a-8f76-5afea72a583f\",\"rows\":[{\"name\":\"TeamsBinding\",\"kind\":\"TeamsMessage\",\"arguments\":[{\"name\":\"messageLocale\",\"type\":\"string\",\"value\":\"en-us\"},{\"name\":\"recipients\",\"type\":\"array\",\"values\":[{\"type\":\"string\",\"value\":\"hkamunuri@verdantas.com\"},{\"type\":\"string\",\"value\":\"mdixit@verdantas.com\"}]},{\"name\":\"headline\",\"type\":\"array\",\"values\":[{\"type\":\"string\",\"value\":\"Activator alert\"}]},{\"name\":\"optionalMessage\",\"type\":\"array\",\"values\":[{\"type\":\"string\",\"value\":\"The condition has been met\"}]},{\"name\":\"additionalInformation\",\"type\":\"array\",\"values\":[{\"arguments\":[{\"name\":\"name\",\"type\":\"string\",\"value\":\"time\"},{\"arguments\":[{\"name\":\"fieldName\",\"type\":\"string\",\"value\":\"time\"}],\"kind\":\"EventFieldReference\",\"name\":\"reference\",\"type\":\"complexReference\"}],\"kind\":\"NameReferencePair\",\"type\":\"complex\"},{\"arguments\":[{\"name\":\"name\",\"type\":\"string\",\"value\":\"___source\"},{\"arguments\":[{\"name\":\"fieldName\",\"type\":\"string\",\"value\":\"___source\"}],\"kind\":\"EventFieldReference\",\"name\":\"reference\",\"type\":\"complexReference\"}],\"kind\":\"NameReferencePair\",\"type\":\"complex\"},{\"arguments\":[{\"name\":\"name\",\"type\":\"string\",\"value\":\"___id\"},{\"arguments\":[{\"name\":\"fieldName\",\"type\":\"string\",\"value\":\"___id\"}],\"kind\":\"EventFieldReference\",\"name\":\"reference\",\"type\":\"complexReference\"}],\"kind\":\"NameReferencePair\",\"type\":\"complex\"},{\"arguments\":[{\"name\":\"name\",\"type\":\"string\",\"value\":\"EventProcessedUtcTime\"},{\"arguments\":[{\"name\":\"fieldName\",\"type\":\"string\",\"value\":\"EventProcessedUtcTime\"}],\"kind\":\"EventFieldReference\",\"name\":\"reference\",\"type\":\"complexReference\"}],\"kind\":\"NameReferencePair\",\"type\":\"complex\"}]}]}]}]}",
+        "settings": {
+          "shouldRun": true,
+          "shouldApplyRuleOnUpdate": true
+        }
+      }
+    },
+    "type": "timeSeriesView-v1"
+  }
+]

@@ -1,0 +1,151 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "a6114ca9-8077-ad5a-45d3-bdabdfbde24f",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "source_table_path": {
+              "value": {
+                "value": "@pipeline().parameters.source_table",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "target_table_path": {
+              "value": {
+                "value": "@pipeline().parameters.tgt_table",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "source": {
+              "value": {
+                "value": "@pipeline().parameters.source",
+                "type": "Expression"
+              },
+              "type": "string"
+            }
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Split Large PDF file",
+        "dependsOn": []
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "890e1fc6-7754-96a3-4d67-dc4c632ecf70",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "input": {
+              "value": {
+                "value": "@activity('Split Large PDF file').output.result.exitValue",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "source_table_path": {
+              "value": {
+                "value": "@pipeline().parameters.source_table",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "target_table_path": {
+              "value": {
+                "value": "@pipeline().parameters.tgt_table",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "source": {
+              "value": {
+                "value": "@pipeline().parameters.source",
+                "type": "Expression"
+              },
+              "type": "string"
+            }
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Get content from Large PDFs",
+        "dependsOn": [
+          {
+            "activity": "Split Large PDF file",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "df749f56-82c9-9b4c-4e4f-db34534fd0b5",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "source_table_path": {
+              "value": {
+                "value": "@pipeline().parameters.source_table",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "target_table_path": {
+              "value": {
+                "value": "@pipeline().parameters.tgt_table",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "source": {
+              "value": {
+                "value": "@pipeline().parameters.source",
+                "type": "Expression"
+              },
+              "type": "string"
+            }
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Get content from files",
+        "dependsOn": []
+      }
+    ],
+    "parameters": {
+      "source_table": {
+        "type": "string",
+        "defaultValue": "Tables/br_acquia_files_ingestion_status_v1"
+      },
+      "tgt_table": {
+        "type": "string",
+        "defaultValue": "Tables/br_acquia_content_ADI"
+      },
+      "source": {
+        "type": "string",
+        "defaultValue": "acquia"
+      }
+    }
+  }
+}

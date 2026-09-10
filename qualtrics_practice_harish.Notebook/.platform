@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "qualtrics_practice_harish"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "ce6d69e4-875b-a470-4149-52b0092d274f"
+  }
+}

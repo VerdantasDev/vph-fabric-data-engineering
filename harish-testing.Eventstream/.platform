@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Eventstream",
+    "displayName": "harish-testing"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "668c93d8-8727-8296-4e08-37bbe3ea4088"
+  }
+}

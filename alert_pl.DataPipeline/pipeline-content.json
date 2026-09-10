@@ -1,0 +1,51 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "name": "Teams1",
+        "type": "Teams",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
+        "dependsOn": [],
+        "typeProperties": {
+          "inputs": {
+            "method": "post",
+            "path": "/beta/teams/conversation/message/poster/User/location/Group chat",
+            "body": {
+              "recipient": "19:ab40f0b985d74c94ae943c546d6c637d@thread.v2",
+              "messageBody": "<p>Test Message Please Ignore</p>"
+            }
+          }
+        }
+      },
+      {
+        "name": "Office 365 Outlook1",
+        "type": "Office365Outlook",
+        "dependsOn": [],
+        "typeProperties": {
+          "inputs": {
+            "method": "post",
+            "path": "/v2/Mail",
+            "body": {
+              "To": "adarsh.pansari@sganalytics.com",
+              "Subject": "Test Message",
+              "Body": "<p>Test message@{pipeline().Pipeline}, and runid @{pipeline().RunId} and tigger event - @{pipeline()?.TriggerEvent?.FileName}</p>",
+              "From": "",
+              "Sensitivity": "",
+              "Importance": "High"
+            }
+          }
+        }
+      }
+    ],
+    "logicAppsConnectionPayload": {
+      "id": "/subscriptions/4b152a16-718e-49b2-b421-12cb0631fa79/resourceGroups/connections-a4338e88-8d35-40c8-9929-a5b820d084e3/providers/Microsoft.Web/connections/1_ddcad7dd-51e4-4b8e-9fdb-e41c1f411a5e_5fcf299d-7b6d-4597-abef-77b6ffb99c24",
+      "properties": {
+        "api": {
+          "name": "office365",
+          "id": "/subscriptions/4b152a16-718e-49b2-b421-12cb0631fa79/providers/Microsoft.Web/locations/northcentralus/managedApis/office365"
+        }
+      }
+    }
+  }
+}

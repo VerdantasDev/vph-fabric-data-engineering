@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "br_m365_sharepoint_data_pl"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "9afbf1a4-074b-9c8e-468f-92f85e5972db"
+  }
+}

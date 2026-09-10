@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "br_m365_teams_data_pl"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "888f7727-823b-8064-48f6-e3ed0c40fc58"
+  }
+}

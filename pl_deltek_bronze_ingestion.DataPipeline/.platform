@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "pl_deltek_bronze_ingestion"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "bcfba735-6069-950e-4703-af2cf7e1f7f6"
+  }
+}

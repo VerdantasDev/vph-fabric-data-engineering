@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Reflex",
+    "displayName": "FileMonitoringAlert"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "ff744ac7-4cf6-b789-471c-b826e7ebe2dc"
+  }
+}

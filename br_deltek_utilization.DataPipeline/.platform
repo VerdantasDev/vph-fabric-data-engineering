@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "br_deltek_utilization"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "3d49bf38-e860-990c-438e-3cc4c49a1f18"
+  }
+}

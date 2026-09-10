@@ -1,0 +1,38 @@
+[
+  {
+    "name": "br_raw_deltek_LD",
+    "path": "/Tables",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/br_raw_deltek_LD",
+        "itemId": "24113e54-6f3f-4157-8c30-a3c5e66de623",
+        "workspaceId": "297572de-b7d7-4285-a88e-1388e2598d4a"
+      }
+    }
+  },
+  {
+    "name": "AzureTest",
+    "path": "/Tables",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/AzureTest",
+        "itemId": "24113e54-6f3f-4157-8c30-a3c5e66de623",
+        "workspaceId": "297572de-b7d7-4285-a88e-1388e2598d4a"
+      }
+    }
+  },
+  {
+    "name": "_delta_log",
+    "path": "/Tables",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/br_raw_deltek_LD/_delta_log",
+        "itemId": "24113e54-6f3f-4157-8c30-a3c5e66de623",
+        "workspaceId": "297572de-b7d7-4285-a88e-1388e2598d4a"
+      }
+    }
+  }
+]

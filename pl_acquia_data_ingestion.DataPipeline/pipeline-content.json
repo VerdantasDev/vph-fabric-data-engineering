@@ -1,0 +1,194 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "ff2c9ca3-39f0-4b77-a315-5eb54b350a5c",
+          "workspaceId": "a4338e88-8d35-40c8-9929-a5b820d084e3"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "get_assets_mapping",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
+        "dependsOn": []
+      },
+      {
+        "type": "ForEach",
+        "typeProperties": {
+          "isSequential": true,
+          "items": {
+            "value": "@variables('assets')",
+            "type": "Expression"
+          },
+          "activities": [
+            {
+              "type": "TridentNotebook",
+              "typeProperties": {
+                "notebookId": "6d0949ff-7484-42fd-933e-2aa47262a22e",
+                "workspaceId": "a4338e88-8d35-40c8-9929-a5b820d084e3",
+                "parameters": {
+                  "InputParam": {
+                    "value": {
+                      "value": "@string(item())",
+                      "type": "Expression"
+                    },
+                    "type": "string"
+                  },
+                  "target_table_path": {
+                    "value": {
+                      "value": "@pipeline().parameters.target_table_path",
+                      "type": "Expression"
+                    },
+                    "type": "string"
+                  }
+                }
+              },
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureInput": false,
+                "secureOutput": false
+              },
+              "name": "Get_assets_data",
+              "dependsOn": []
+            }
+          ]
+        },
+        "name": "Iterate over Collections",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
+        "dependsOn": [
+          {
+            "activity": "Set assets map",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "SetVariable",
+        "typeProperties": {
+          "variableName": "assets",
+          "value": {
+            "value": "@json(activity('get_assets_mapping').output.result.exitValue)",
+            "type": "Expression"
+          }
+        },
+        "policy": {
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Set assets map",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
+        "dependsOn": [
+          {
+            "activity": "get_assets_mapping",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "InvokePipeline",
+        "typeProperties": {
+          "parameters": {
+            "source_table": "Tables/br_acquia_files_ingestion_status_v2",
+            "tgt_table": "Tables/br_acquia_content_ADI_v2",
+            "source": "acquia"
+          },
+          "waitOnCompletion": true,
+          "workspaceId": "a4338e88-8d35-40c8-9929-a5b820d084e3",
+          "pipelineId": "20ac4b73-2a07-470e-9f29-f6fe00c0f70d",
+          "operationType": "InvokeFabricPipeline"
+        },
+        "externalReferences": {
+          "connection": "0a8594b5-7232-4c2b-9182-64f74d3651dd"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Invoke content extraction pipeline",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
+        "dependsOn": [
+          {
+            "activity": "Iterate over Collections",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "ExecutePipeline",
+        "typeProperties": {
+          "pipeline": {
+            "referenceName": "00c0f70d-f6fe-9f29-470e-2a0720ac4b73",
+            "type": "PipelineReference"
+          },
+          "parameters": {
+            "source_table": {
+              "value": "@pipeline().parameters.target_table_path",
+              "type": "Expression"
+            },
+            "tgt_table": {
+              "value": "@pipeline().parameters.content_table",
+              "type": "Expression"
+            },
+            "source": {
+              "value": "@pipeline().parameters.source",
+              "type": "Expression"
+            }
+          },
+          "waitOnCompletion": true
+        },
+        "policy": {
+          "secureInput": false
+        },
+        "name": "Invoke pipeline1",
+        "dependsOn": [
+          {
+            "activity": "Iterate over Collections",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      }
+    ],
+    "parameters": {
+      "target_table_path": {
+        "type": "string",
+        "defaultValue": "Tables/br_acquia_files_ingestion_status_v2"
+      },
+      "source": {
+        "type": "string",
+        "defaultValue": "acquia"
+      },
+      "content_table": {
+        "type": "string",
+        "defaultValue": "Tables/br_acquia_content_ADI_v2"
+      }
+    },
+    "variables": {
+      "assets": {
+        "type": "Array"
+      }
+    }
+  }
+}

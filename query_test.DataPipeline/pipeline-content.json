@@ -1,0 +1,71 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "name": "Copy data1",
+        "type": "Copy",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "source": {
+            "type": "AzureSqlSource",
+            "sqlReaderQuery": "SELECT \n    LedgerAR.Wbs1, \n    LedgerAR.invoice,\n    LedgerAR.taxcode,\n    LedgerAR.TransType,\n    LedgerAR.TransDate,\n    LedgerAR.SubType,\n    LedgerAR.AutoEntry,\n    LedgerAR.Period,\n    LedgerAR.EmOrg,\n    AR.InvoiceDate, \n    AR.DueDate,\n    AR.LinkCompany,\n    PR.ClientID,\n    PR.WBS1,\n    PR.BillingContactID,\n    PR.billingClientID,\n    PR.Sublevel,\n    PR.BillingContactID,\n    \n    SUM(\n        CASE \n            WHEN LedgerAR.taxcode IS NULL \n                THEN CASE \n                        WHEN LedgerAR.TransType = 'IN' THEN -amount \n                        ELSE CASE WHEN LedgerAR.TransType = 'CR' AND LedgerAR.SubType = 'T' THEN -amount \n                             ELSE amount END\n                    END \n            ELSE 0.0 \n        END\n    ) AS WBS1InvoiceBal \nFROM \n    LedgerAR\n    INNER JOIN AR ON AR.WBS1 = LedgerAR.WBS1 AND AR.WBS2 = LedgerAR.WBS2 AND AR.WBS3 = LedgerAR.WBS3 AND AR.Invoice = LedgerAR.Invoice \n    INNER JOIN PR ON AR.WBS1 = PR.WBS1 AND PR.WBS2 = ' ' AND PR.WBS3 = ' ' \n    INNER JOIN PR AS LEVEL2 ON AR.WBS1 = LEVEL2.WBS1 AND AR.WBS2 = LEVEL2.WBS2 AND LEVEL2.WBS3 = ' ' \n    INNER JOIN PR AS LEVEL3 ON AR.WBS1 = LEVEL3.WBS1 AND AR.WBS2 = LEVEL3.WBS2 AND LEVEL3.WBS3 = AR.WBS3 \n     \nWHERE \n    AR.WBS1 = LedgerAR.WBS1 \n    AND AR.WBS2 = LedgerAR.WBS2 \n    AND AR.WBS3 = LedgerAR.WBS3 \n    AND AR.Invoice = LedgerAR.Invoice \n    AND (\n        (LedgerAR.TransType = 'IN' AND (LedgerAR.SubType <> 'X' OR LedgerAR.SubType IS NULL))\n        OR (LedgerAR.TransType = 'CR' AND LedgerAR.SubType IN ('R', 'T'))\n    ) \n    AND LedgerAR.AutoEntry = 'N' \n    AND amount <> 0 \n    AND (\n        (SUBSTRING(LEVEL3.Org, 1, 3) LIKE '0%')\n        AND (LEVEL2.Sublevel = 'N' OR LEVEL3.WBS3 > ' ')\n    ) \n    AND (\n        LedgerAR.TransType = 'IN' \n        AND (\n          LedgerAR.SubType <> 'X' \n          OR LedgerAR.SubType Is Null\n        ) \n        OR (\n          LedgerAR.TransType = 'CR' \n          AND LedgerAR.SubType IN ('R', 'T')\n        )\n    ) \n    AND LedgerAR.AutoEntry = 'N' \n    AND LedgerAR.Period >= 0 \n    AND AR.linkCompany IS NULL \nGROUP BY \n    LedgerAR.Wbs1, \n    LedgerAR.invoice,\n    LedgerAR.taxcode,\n    LedgerAR.TransType,\n    LedgerAR.TransDate,\n    LedgerAR.SubType,\n    LedgerAR.AutoEntry,\n    LedgerAR.Period,\n    LedgerAR.EmOrg,\n    AR.InvoiceDate, \n    AR.DueDate,\n    AR.LinkCompany,\n    PR.ClientID,\n    PR.WBS1,\n    PR.BillingContactID,\n    PR.billingClientID,\n    PR.Sublevel,\n    PR.BillingContactID;",
+            "queryTimeout": "02:00:00",
+            "partitionOption": "None",
+            "datasetSettings": {
+              "annotations": [],
+              "type": "AzureSqlTable",
+              "schema": [],
+              "typeProperties": {
+                "database": "VPC-Vantagepoint"
+              },
+              "externalReferences": {
+                "connection": "52380743-e8b0-4b00-8cae-fa1dc6ae0913"
+              }
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "Append",
+            "partitionOption": "None",
+            "datasetSettings": {
+              "annotations": [],
+              "linkedService": {
+                "name": "VPC_BI_ODBC",
+                "properties": {
+                  "annotations": [],
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "workspaceId": "297572de-b7d7-4285-a88e-1388e2598d4a",
+                    "artifactId": "c1440039-52c4-4208-ba78-0d2c13c5c8a3",
+                    "rootFolder": "Tables"
+                  }
+                }
+              },
+              "type": "LakehouseTable",
+              "schema": [],
+              "typeProperties": {
+                "table": "ARForDax"
+              }
+            }
+          },
+          "enableStaging": false,
+          "translator": {
+            "type": "TabularTranslator",
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          }
+        }
+      }
+    ]
+  }
+}
